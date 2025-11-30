@@ -1,4 +1,5 @@
-# Demo: https://breweries-app-three.vercel.app
+# <a href="https://breweries-app-three.vercel.app/" target="_blank">Live Demo</a>
+
 
 # Brewery Explorer
 
@@ -6,11 +7,11 @@ A small application for browsing breweries from the OpenBreweryDB API,\
 featuring a virtualized list, bidirectional infinite scrolling,\
 and a detailed view for each brewery.
 
-------------------------------------------------------------------------
+---
 
 ## How to Run
 
-``` bash
+```bash
 npm install
 npm run dev
 ```
@@ -19,44 +20,44 @@ Then open:
 
     http://localhost:3000
 
-------------------------------------------------------------------------
+---
 
 ## Features
 
 ### 🔹 1. Brewery List
 
--   Loads **15 breweries** on the first render.
--   The app **never renders more than 15 items at once** --- thanks to
-    windowing.
--   The scrolling experience is smooth and consistent.
+- Loads **15 breweries** on the first render.
+- The app **never renders more than 15 items at once** --- thanks to
+  windowing.
+- The scrolling experience is smooth and consistent.
 
-------------------------------------------------------------------------
+---
 
 ### 🔹 2. Bidirectional Infinite Scroll
 
 The list behaves like a real continuous feed:
 
--   When the user scrolls **down** and about 5 items remain to the
-    bottom,\
-    the next page is fetched automatically.
--   When scrolling **up**, the list brings back the previous items.
--   At any moment, **only 15 items are present in the DOM**.
+- When the user scrolls **down** and about 5 items remain to the
+  bottom,\
+  the next page is fetched automatically.
+- When scrolling **up**, the list brings back the previous items.
+- At any moment, **only 15 items are present in the DOM**.
 
 This keeps the interface fast and lightweight even with large datasets.
 
-------------------------------------------------------------------------
+---
 
 ### 🔹 3. Selection & Deletion
 
--   Right--click on a card toggles selection.
--   A **Delete** button appears in the header when at least one item is
-    selected.
--   After deletion:
-    -   the selected breweries disappear,
-    -   if fewer than 15 items remain --- new ones are automatically
-        fetched.
+- Right--click on a card toggles selection.
+- A **Delete** button appears in the header when at least one item is
+  selected.
+- After deletion:
+  - the selected breweries disappear,
+  - if fewer than 15 items remain --- new ones are automatically
+    fetched.
 
-------------------------------------------------------------------------
+---
 
 ### 🔹 4. Brewery Details Page
 
@@ -67,18 +68,18 @@ Clicking a card opens:
 The detail page includes: - name, - type, - address, - phone, -
 website, - open in maps button.
 
-------------------------------------------------------------------------
+---
 
 ## Technologies
 
--   **Next.js 14 (App Router)**
--   **React 18**
--   **Zustand** --- state and windowing logic
--   **Tailwind CSS**
--   **Axios**
--   **TypeScript**
+- **Next.js 14 (App Router)**
+- **React 18**
+- **Zustand** --- state and windowing logic
+- **Tailwind CSS**
+- **Axios**
+- **TypeScript**
 
-------------------------------------------------------------------------
+---
 
 ## Project Structure
 
@@ -102,7 +103,7 @@ website, - open in maps button.
      │
      └─ README.md
 
-------------------------------------------------------------------------
+---
 
 ## Windowing Logic
 
@@ -116,7 +117,7 @@ automatically
 
 This ensures the list stays efficient and responsive.
 
-------------------------------------------------------------------------
+---
 
 ## API
 
@@ -125,7 +126,7 @@ Using the public OpenBreweryDB:
     GET https://api.openbrewerydb.org/v1/breweries?page={n}&per_page=15
     GET https://api.openbrewerydb.org/v1/breweries/{id}
 
-------------------------------------------------------------------------
+---
 
 ## Purpose
 
