@@ -16,7 +16,7 @@ interface BreweriesStore {
   loadMore: () => Promise<void>;
   toggleSelect: (id: string) => void;
   deleteSelected: () => Promise<void>;
-  moveWondowDown: () => Promise<void>;
+  moveWindowDown: () => Promise<void>;
   moveWindowUp: () => void;
 }
 
@@ -98,7 +98,7 @@ export const useBreweriesStore = create<BreweriesStore>((set, get) => ({
     }
   },
 
-  moveWondowDown: async () => {
+  moveWindowDown: async () => {
     const { breweries, startIndex, hasMore } = get();
 
     const below = breweries.length - (startIndex + WINDOW_SIZE);

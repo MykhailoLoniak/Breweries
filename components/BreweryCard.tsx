@@ -3,6 +3,7 @@
 import React, { forwardRef } from 'react'
 import type { Brewery } from '@/lib/types'
 import BreweryActionLink from './BreweryActionLink';
+import Link from 'next/link';
 
 const formatAddress = (b: Brewery) => [
   b.city,
@@ -44,7 +45,7 @@ const BreweryCard = forwardRef<HTMLDivElement, BreweryCardProps>(({
       className={`border p-5 block rounded-lg ${isSelected && 'bg-gray-100 opacity-65'}`}
       ref={ref}
     >
-      <a href={`/brewery/${brewery.id}`}>
+      <Link href={`/brewery/${brewery.id}`}>
         <div className='flex justify-between'>
           <h2 className='font-semibold w-full'>{brewery.name}</h2>
           <span className={`px-4 py-1 text-white rounded-sm ${brewery.brewery_type === 'micro' ? 'bg-green-200' : 'bg-red-200'}`}>{brewery.brewery_type}</span>
@@ -60,7 +61,7 @@ const BreweryCard = forwardRef<HTMLDivElement, BreweryCardProps>(({
             <span>{address}</span>
           </div>
         </div>
-      </a>
+      </Link>
 
       <div className='flex gap-5'>
         <BreweryActionLink type='call' value={brewery.phone} />

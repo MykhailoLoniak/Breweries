@@ -1,3 +1,5 @@
+# Demo: https://breweries-app-three.vercel.app
+
 # Brewery Explorer
 
 A small application for browsing breweries from the OpenBreweryDB API,\

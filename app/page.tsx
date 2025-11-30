@@ -14,7 +14,7 @@ export default function Home() {
   const isLoading = useBreweriesStore((state) => state.isLoading);
   const toggleSelect = useBreweriesStore((state) => state.toggleSelect);
   const hasMore = useBreweriesStore((state) => state.hasMore);
-  const moveWondowDown = useBreweriesStore((state) => state.moveWondowDown);
+  const moveWondowDown = useBreweriesStore((state) => state.moveWindowDown);
   const moveWindowUp = useBreweriesStore((state) => state.moveWindowUp);
 
   useEffect(() => {
