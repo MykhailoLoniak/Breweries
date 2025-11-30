@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Brewery Explorer
 
-## Getting Started
+A small application for browsing breweries from the OpenBreweryDB API,\
+featuring a virtualized list, bidirectional infinite scrolling,\
+and a detailed view for each brewery.
 
-First, run the development server:
+------------------------------------------------------------------------
 
-```bash
+## How to Run
+
+``` bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+    http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+------------------------------------------------------------------------
 
-## Learn More
+## Features
 
-To learn more about Next.js, take a look at the following resources:
+### 🔹 1. Brewery List
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-   Loads **15 breweries** on the first render.
+-   The app **never renders more than 15 items at once** --- thanks to
+    windowing.
+-   The scrolling experience is smooth and consistent.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+------------------------------------------------------------------------
 
-## Deploy on Vercel
+### 🔹 2. Bidirectional Infinite Scroll
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The list behaves like a real continuous feed:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+-   When the user scrolls **down** and about 5 items remain to the
+    bottom,\
+    the next page is fetched automatically.
+-   When scrolling **up**, the list brings back the previous items.
+-   At any moment, **only 15 items are present in the DOM**.
+
+This keeps the interface fast and lightweight even with large datasets.
+
+------------------------------------------------------------------------
+
+### 🔹 3. Selection & Deletion
+
+-   Right--click on a card toggles selection.
+-   A **Delete** button appears in the header when at least one item is
+    selected.
+-   After deletion:
+    -   the selected breweries disappear,
+    -   if fewer than 15 items remain --- new ones are automatically
+        fetched.
+
+------------------------------------------------------------------------
+
+### 🔹 4. Brewery Details Page
+
+Clicking a card opens:
+
+    /brewery/[id]
+
+The detail page includes: - name, - type, - address, - phone, -
+website, - open in maps button.
+
+------------------------------------------------------------------------
+
+## Technologies
+
+-   **Next.js 14 (App Router)**
+-   **React 18**
+-   **Zustand** --- state and windowing logic
+-   **Tailwind CSS**
+-   **Axios**
+-   **TypeScript**
+
+------------------------------------------------------------------------
+
+## Project Structure
+
+    project/
+     ├─ app/
+     │   ├─ page.tsx               ← brewery list
+     │   └─ brewery/[id]/page.tsx  ← brewery details
+     │
+     ├─ components/
+     │   ├─ BreweryList.tsx
+     │   ├─ BreweryCard.tsx
+     │   ├─ BreweryActionLink.tsx
+     │   └─ DeleteSelectedButton.tsx
+     │
+     ├─ store/
+     │   └─ breweriesStore.ts       ← windowing + scroll logic
+     │
+     ├─ lib/
+     │   ├─ api.ts                  ← API functions
+     │   └─ types.ts                ← Type definitions
+     │
+     └─ README.md
+
+------------------------------------------------------------------------
+
+## Windowing Logic
+
+State contains: - **breweries\[\]** --- all loaded data -
+**visible\[\]** --- the current 15-item window - **startIndex** --- the
+index of the first visible item
+
+Scrolling actions: - `moveWindowDown()` increases `startIndex` -
+`moveWindowUp()` decreases `startIndex` - `visible` updates
+automatically
+
+This ensures the list stays efficient and responsive.
+
+------------------------------------------------------------------------
+
+## API
+
+Using the public OpenBreweryDB:
+
+    GET https://api.openbrewerydb.org/v1/breweries?page={n}&per_page=15
+    GET https://api.openbrewerydb.org/v1/breweries/{id}
+
+------------------------------------------------------------------------
+
+## Purpose
+
+This project was created as a test task.\
+The codebase is designed to be clean, predictable, and easy to extend.
